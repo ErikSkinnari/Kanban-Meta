@@ -7,5 +7,27 @@ namespace KanbanMetaWeb.Models
 {
     public class Board
     {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public List<Column> Columns { get; set; } = new List<Column>();
+        public List<User> Users { get; set; } = new List<User>();
+
+
+
+        public void AddColumn()
+        {
+
+        }
+
+        public void RemoveColumn(int columnId)
+        {
+
+        }
+
+        public void EditTitle(string title)
+        {
+
+        }
+
     }
 }
