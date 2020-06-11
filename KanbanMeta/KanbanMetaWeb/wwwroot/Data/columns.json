@@ -1,0 +1,29 @@
+[
+  {
+    "id": "424eb558-2b32-4986-91a4-284fcaed9c42",
+    "boardId": "94e25123-afac-4bb4-8b89-0496becc8433",
+    "columns": [
+      {
+        "id": 0,
+        "name": "Backlog"
+      },
+      {
+        "id": 1,
+        "name": "TODO"
+      },
+      {
+        "id": 2,
+        "name": "Doing"
+      },
+      {
+        "id": 3,
+        "name": "Testing"
+      },
+      {
+        "id": 4,
+        "name": "Done"
+      }
+    ]
+  },
+  
+]
