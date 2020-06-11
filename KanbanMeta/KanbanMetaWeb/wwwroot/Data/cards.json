@@ -63,9 +63,10 @@
     "columnId": 4
   },
   {
-    "Id": 500,
-    "Title": "Test",
-    "Description": "Saving to db",
-    "ColimnId": 0
+    "id": "500",
+    "boardId": "2",
+    "title": "Test",
+    "description": "Saving to db",
+    "columnId": 0
   }
 ]
