@@ -9,12 +9,12 @@ namespace KanbanMetaWeb.Interfaces
 {
     public interface IDbManager
     {
-        public void SaveData(Object obj, string path);
+        public void SaveData(object obj, string path);
 
         public IEnumerable GetData(string path);
 
         public object UpdateData();
 
-        public void DeleteData();
+        public void DeleteData(string id, string path);
     }
 }
