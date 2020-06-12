@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using KanbanMetaWeb.Controllers;
 using KanbanMetaWeb.Models;
 using System.Collections;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace KanbanMetaWeb.Pages
 {
@@ -16,24 +17,25 @@ namespace KanbanMetaWeb.Pages
 
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger, CardControllerService productService)
+        public IndexModel(ILogger<IndexModel> logger, DataService dataService)
         {
             _logger = logger;
-            ProductService = productService;
+            DataService = dataService;
         }
 
-        public CardControllerService ProductService { get; }
+        public DataService DataService { get; }
         public IEnumerable Cards { get; private set; }
 
-        public void OnGet()
+        public async void OnGet()
         {
-            //Cards = ProductService.GetData("cards.json");
-            //Console.Write(Cards);
 
-            //Card card = new Card() {id = "1337", boardId = "1", title = "Elite", description = "Hej", columnId = 0 };
-            //ProductService.SaveData(card, "cards.json");
+            //Card card = new Card() { Id = "1337", BoardId = "1", Title = "Elite", Description = "Hej", ColumnId = 0 };
 
-            //ProductService.DeleteData("1337", "cards.json");
+            //await DataService.AddCard(card);
+
+            // await DataService.DeleteCard("1337");
+
+
         }
     }
 }

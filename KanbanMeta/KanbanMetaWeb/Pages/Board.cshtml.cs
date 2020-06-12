@@ -22,9 +22,9 @@ namespace KanbanMetaWeb.Pages
         }
         
 
-        public void OnGet()
+        public async void OnGet()
         {
-            Board = _dataManger.GetBoard();
+            Board = await _dataManger.GetBoard(1);
         }
     }
 }
