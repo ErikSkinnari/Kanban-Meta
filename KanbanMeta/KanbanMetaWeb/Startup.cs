@@ -26,7 +26,7 @@ namespace KanbanMetaWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddTransient<CardControllerService>();
+            services.AddTransient<DataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
