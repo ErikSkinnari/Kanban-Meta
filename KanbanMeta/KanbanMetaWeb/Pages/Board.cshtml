@@ -4,5 +4,61 @@
     ViewData["Title"] = "Board" + Model.BoardId;
 }
 
-<h1>Board</h1>
+
+<!-- Wrapper with image -->
+<div class="h-100 pt-4 board-wrapper" id="background">
+
+    <!-- Whole kanban board -->
+    <div class="d-flex" id="main-board">
+
+        <h1>@Model.Board.Title</h1>
+
+        @foreach (var column in Model.Board.Columns)
+        {
+
+
+            <!-- @column.Title Column -->
+            <div class="border-0 rounded-top w-50 align-self-start p-0 m-1 main-column">
+
+                <div class="card-header d-flex justify-content-between bg-dark text-light text-light">
+                    <h4>@column.Title</h4>
+
+                    @if (column.Id == 0)
+                    {
+                        <button class="btn bg-light text-dark rounded" id="addCardButton"><b><i class="fas fa-plus"></i> Add Card</b></button>
+                    }
+                </div>
+
+                @if (column.Id == 0)
+                {
+
+                    <div class="d-none p-2 bg-dark text-light" id="newCardInput">
+                        <label for="newCardTitle">Title</label><br>
+                        <input type="text" style="width: 100%;" id="newCardTitle"><br>
+                        <label class="mt-3" for="newCardDescription">Description</label><br>
+                        <textarea name="newCardDescription" id="newCardDescription" style="width: 100%;" rows="5"></textarea>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-light" id="saveNewCardButton">Save</button>
+                            <button class="btn btn-light" id="discardNewCardButton">Cancel</button>
+                        </div>
+                    </div>
+                }
+                <div id="col-@column.Id}">
+
+                    @foreach(var card in Model.Board.Cards)
+                    {
+
+                    }
+
+                    // Här skall korten ligga.
+
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+
+<script src="~/js/main.js" type="text/javascript"></script>
 

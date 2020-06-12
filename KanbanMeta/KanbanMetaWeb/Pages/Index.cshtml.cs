@@ -33,7 +33,7 @@ namespace KanbanMetaWeb.Pages
             //Card card = new Card() {id = "1337", boardId = "1", title = "Elite", description = "Hej", columnId = 0 };
             //ProductService.SaveData(card, "cards.json");
 
-            ProductService.DeleteData("1337", "cards.json");
+            //ProductService.DeleteData("1337", "cards.json");
         }
     }
 }
