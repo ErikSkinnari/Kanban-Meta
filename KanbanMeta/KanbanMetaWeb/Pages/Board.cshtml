@@ -7,21 +7,22 @@
 
 <!-- Wrapper with image -->
 <div class="h-100 pt-4 board-wrapper" id="background">
+        
+    <h1>@Model.Board.Title</h1>
 
     <!-- Whole kanban board -->
     <div class="d-flex" id="main-board">
 
-        <h1>@Model.Board.Title</h1>
 
         @foreach (var column in Model.Board.Columns)
         {
 
 
-            <!-- @column.Title Column -->
+            <!-- @column.Name Column -->
             <div class="border-0 rounded-top w-50 align-self-start p-0 m-1 main-column">
 
                 <div class="card-header d-flex justify-content-between bg-dark text-light text-light">
-                    <h4>@column.Title</h4>
+                    <h4>@column.Name</h4>
 
                     @if (column.Id == 0)
                     {
@@ -43,16 +44,44 @@
                         </div>
                     </div>
                 }
-                <div id="col-@column.Id}">
+            <div id="col-@column.Id}">
 
-                    @foreach(var card in Model.Board.Cards)
+                @foreach (var card in Model.Board.Cards)
+                {
+                    @if (card.ColumnId == column.Id)
                     {
-                        <h1>@card.Title</h1>
+                        <!-- Card -->
+                        <div class="card mt-2 p-2 shadow-sm rounded-0 k-card" id="card_@card.Id">
+                            <h5 class="card-header bg-dark text-light rounded-0 k-card-header" id="cardTitle_@card.Id">@card.Title</h5>
+                            <p class="card-text p-3 mb-0" id="cardDescription_@card.Id">@card.Description</p>
+
+                            <!-- Card control panel -->
+                            <div class="arrows d-flex justify-content-between mb-1">
+                                <span class="ml-3" style="font-size: 20px;"><i id="moveLeft_@card.Id" class="fas fa-arrow-left text-dark k-card-control"></i></span>
+                                <span style="font-size: 20px;"><i id="editCard_@card.Id" class="fas fa-pen text-dark k-card-control"></i></span>
+                                <span style="font-size: 20px;"><i id="removeCard_@card.Id" class="fas fa-trash-alt text-dark k-card-control"></i></span>
+                                <span class="mr-3" style="font-size: 20px;"><i id="moveRight_@card.Id" class="fas fa-arrow-right text-dark k-card-control"></i></span>
+                            </div>
+
+                            <!-- Card footer -->
+                            <div class="card-footer bg-dark text-light rounded-0 mt-2"></div>
+
+                            <!-- Edit Card -->
+                            <div class="d-none p-2 bg-light text-dark" id="editCardInput_@card.Id">
+                                <label for="editCardTitle_@card.Id"> New Title</label><br>
+                                <input type="text" style="width: 100%;" id="editCardTitle_@card.Id"><br>
+                                <label class="mt-3" for="editCardDescription_@card.Id">Description</label><br>
+                                <textarea name="editCardDescription" id="editCardDescription_@card.Id" style="width: 100%;" rows="10"></textarea>
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn btn-dark" id="saveChangesButton_@card.Id">Save</button>
+                                    <button class="btn btn-dark" id="discardChangesButton_@card.Id">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
                     }
+                }
 
-                    // Här skall korten ligga.
-
-                </div>
+            </div>
             </div>
 
         }

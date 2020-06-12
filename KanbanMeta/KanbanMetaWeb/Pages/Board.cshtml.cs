@@ -20,11 +20,14 @@ namespace KanbanMetaWeb.Pages
         {
             _dataManger = dataManager;
         }
-        
 
-        public async void OnGet()
+#nullable enable
+        public async void OnGet(string id)
         {
-            Board = await _dataManger.GetBoard(1);
+            id = "94e25123-afac-4bb4-8b89-0496becc8433";
+
+            Board = await _dataManger.GetBoard(id);
         }
     }
+#nullable disable
 }

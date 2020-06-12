@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.Collections;
 using KanbanMetaWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace KanbanMetaWeb.Controllers
 {
@@ -25,7 +26,7 @@ namespace KanbanMetaWeb.Controllers
 
         public IWebHostEnvironment WebHostEnvironment { get; }
 
-        private string JsonFileName {get; set;}
+        private string JsonFileName { get; set; }
 
         public async Task AddCard(Card card)
         {
@@ -50,7 +51,7 @@ namespace KanbanMetaWeb.Controllers
 
                 await File.WriteAllTextAsync(JsonFileName, json);
             }
-            
+
         }
 
         public async Task DeleteCard(string cardId)
@@ -80,19 +81,68 @@ namespace KanbanMetaWeb.Controllers
             }
         }
 
-        public Task DeleteBoard(int boardId)
+        public Task DeleteBoard(string boardId)
         {
             throw new NotImplementedException();
         }
 
-        public Task EditCard(int cardId, Card card)
+        public Task EditCard(string cardId, Card card)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Board> GetBoard(int boardId)
+        public async Task<Board> GetBoard(string boardId)
         {
-            throw new NotImplementedException();
+            var board = new Board();
+            IEnumerable<Card> cards;
+            IEnumerable<User> users;
+
+            JsonFileName = Path.Combine(WebHostEnvironment.WebRootPath, "Data/");
+
+            // Get the board
+            using (var fileReader = File.OpenText(JsonFileName + "boards.json"))
+            {
+                var boards = System.Text.Json.JsonSerializer.Deserialize<Board[]>(fileReader.ReadToEnd(),
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                board = boards.Where(b => b.Id == boardId).FirstOrDefault();
+            }
+
+
+            // Get the users
+            using (var fileReader = File.OpenText(JsonFileName + "users.json"))
+            {
+                users = System.Text.Json.JsonSerializer.Deserialize<List<User>>(fileReader.ReadToEnd(),
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                foreach(var user in users)
+                {
+                    Console.WriteLine(user.Id + " " + user.Username);
+                }
+
+                Console.WriteLine(board.UserIds.FirstOrDefault());
+
+                var boardUsers = from user in users
+                                 where board.UserIds.Contains(user.Id)
+                                 select user;
+
+                board.Users = boardUsers; // TODO Fix this. Board.Users remains null
+            }
+
+            // Get the cards
+            using (var fileReader = File.OpenText(JsonFileName + "cards.json"))
+            {
+                cards = System.Text.Json.JsonSerializer.Deserialize<List<Card>>(fileReader.ReadToEnd(),
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                cards = from card in cards
+                        where card.BoardId == boardId
+                        select card;
+
+                board.Cards = cards;
+            }
+
+            return board;
         }
 
 
