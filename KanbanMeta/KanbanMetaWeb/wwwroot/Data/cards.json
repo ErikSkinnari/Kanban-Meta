@@ -3,21 +3,21 @@
     "id": "28c78719-8466-4aea-ba6e-749fe6bfa3ca",
     "boardId": "94e25123-afac-4bb4-8b89-0496becc8433",
     "title": "Models",
-    "description": "Skapa models f�r korten, kolumnerna och br�dan.",
+    "description": "Skapa models f?r korten, kolumnerna och br?dan.",
     "columnId": 0
   },
   {
     "id": "7f043234-c292-4201-829f-c4a4df0b837a",
     "boardId": "94e25123-afac-4bb4-8b89-0496becc8433",
     "title": "Databas",
-    "description": "Planera och g�ra research p� hur vi sparar v�r data.",
+    "description": "Planera och g?ra research p? hur vi sparar v?r data.",
     "columnId": 0
   },
   {
     "id": "94e25123-afac-4bb4-8589-0476becc8533",
     "boardId": "94e25123-afac-4bb4-8b89-0496becc8433",
     "title": "Editera kort",
-    "description": "Man skall kunna �ndra inneh�llet i ett kort..",
+    "description": "Man skall kunna ?ndra inneh?llet i ett kort..",
     "columnId": 0
   },
   {
@@ -31,7 +31,7 @@
     "id": "9d87f587-189a-41a8-a737-1694f0a90058",
     "boardId": "94e25123-afac-4bb4-8b89-0496becc8433",
     "title": "Planera C#-metoder",
-    "description": "Skissa p� vilka metoder och klasser vi beh�ver.",
+    "description": "Skissa p? vilka metoder och klasser vi beh?ver.",
     "columnId": 0
   },
   {
@@ -44,15 +44,15 @@
   {
     "id": "5894a9b9-759d-4fc6-bc30-281008a505ee",
     "boardId": "94e25123-afac-4bb4-8b89-0496becc8433",
-    "title": "Skissa p� frontenddesignen",
-    "description": "Testa att skapa en plan �ver utseendet p� sidan. Bootstrap.",
+    "title": "Skissa p? frontenddesignen",
+    "description": "Testa att skapa en plan ?ver utseendet p? sidan. Bootstrap.",
     "columnId": 1
   },
   {
     "id": "07de3cb8-3a04-4c84-a463-ee1b7a1ea4c3",
     "boardId": "94e25123-afac-4bb4-8b89-0496becc8433",
-    "title": "Skapa repo p� Github",
-    "description": "Skapa ett repo p� github, med begr�nsningar f�r hur ny kod kommer in i development-grenen.",
+    "title": "Skapa repo p? Github",
+    "description": "Skapa ett repo p? github, med begr?nsningar f?r hur ny kod kommer in i development-grenen.",
     "columnId": 2
   },
   {
