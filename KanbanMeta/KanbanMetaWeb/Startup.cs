@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KanbanMetaWeb.Controllers;
+using KanbanMetaWeb.Interfaces;
 using KanbanMetaWeb.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,7 +27,7 @@ namespace KanbanMetaWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddTransient<DataService>();
+            services.AddTransient<IDataManager, DataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

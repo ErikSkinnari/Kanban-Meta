@@ -10,13 +10,13 @@ namespace KanbanMetaWeb.Interfaces
 {
     public interface IDataManager
     {
-        public Task<Board> GetBoard(int boardId);
+        public Task<Board> GetBoard(string boardId);
 
-        public Task DeleteBoard(int boardId);
+        public Task DeleteBoard(string boardId);
 
         public Task AddCard(Card card);
 
-        public Task EditCard(int cardId, Card card);
+        public Task EditCard(string cardId, Card card);
 
         public Task DeleteCard(string cardId);
 

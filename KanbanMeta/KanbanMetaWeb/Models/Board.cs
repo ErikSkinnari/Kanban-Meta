@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,11 +8,21 @@ namespace KanbanMetaWeb.Models
 {
     public class Board
     {
-        public int Id { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("title")]
         public string Title { get; set; }
-        public List<Column> Columns { get; set; } = new List<Column>();
-        public List<User> Users { get; set; } = new List<User>();
-        public List<Card> Cards { get; set; } = new List<Card>();
+
+        [JsonProperty("columns")]
+        public IEnumerable<Column> Columns { get; set; } = new List<Column>();
+
+        [JsonProperty("userIds")]
+        public IEnumerable<string> UserIds { get; set; } 
+
+        public IEnumerable<User> Users { get; set; } = new List<User>();
+
+        public IEnumerable<Card> Cards { get; set; } = new List<Card>();
 
 
         public void AddColumn()

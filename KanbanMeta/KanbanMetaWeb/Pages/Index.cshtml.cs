@@ -9,6 +9,7 @@ using KanbanMetaWeb.Controllers;
 using KanbanMetaWeb.Models;
 using System.Collections;
 using Microsoft.Extensions.DependencyInjection;
+using KanbanMetaWeb.Interfaces;
 
 namespace KanbanMetaWeb.Pages
 {
@@ -17,13 +18,15 @@ namespace KanbanMetaWeb.Pages
 
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger, DataService dataService)
+        private readonly IDataManager _dataService;
+
+        public IndexModel(ILogger<IndexModel> logger, IDataManager dataService)
         {
             _logger = logger;
-            DataService = dataService;
+            _dataService = dataService;
         }
 
-        public DataService DataService { get; }
+        
         public IEnumerable Cards { get; private set; }
 
         public async void OnGet()
@@ -33,7 +36,8 @@ namespace KanbanMetaWeb.Pages
 
             //await DataService.AddCard(card);
 
-            await DataService.DeleteCard("1337");
+            // await DataService.DeleteCard("1337");
+
 
         }
     }

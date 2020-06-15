@@ -1,7 +1,31 @@
 [
   {
     "id": "94e25123-afac-4bb4-8b89-0496becc8433",
-    "userId": "43e508dc-9f6d-42fd-ac21-6dab5be6d554",
-    "title": "Test Board"
+    "userIds": [
+      "43e508dc-9f6d-42fd-ac21-6dab5be6d554"
+    ],    
+    "title": "Test Board",
+    "columns": [
+      {
+        "id": 0,
+        "name": "Backlog"
+      },
+      {
+        "id": 1,
+        "name": "TODO"
+      },
+      {
+        "id": 2,
+        "name": "Doing"
+      },
+      {
+        "id": 3,
+        "name": "Testing"
+      },
+      {
+        "id": 4,
+        "name": "Done"
+      }
+    ]
   }
 ]
