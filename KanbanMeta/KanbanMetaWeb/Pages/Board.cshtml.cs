@@ -24,7 +24,8 @@ namespace KanbanMetaWeb.Pages
 #nullable enable
         public async void OnGet(string id)
         {
-            id = "94e25123-afac-4bb4-8b89-0496becc8433";
+            //id = "94e25123-afac-4bb4-8b89-0496becc8433";
+            //id = "9000";
 
             Board = await _dataManger.GetBoard(id);
         }
