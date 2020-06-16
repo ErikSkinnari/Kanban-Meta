@@ -7,7 +7,9 @@ using KanbanMetaWeb.Interfaces;
 using KanbanMetaWeb.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +30,11 @@ namespace KanbanMetaWeb
         {
             services.AddRazorPages();
             services.AddTransient<IDataManager, DataService>();
+            services.AddTransient<IUserManager, UserService>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<CookieChecker>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

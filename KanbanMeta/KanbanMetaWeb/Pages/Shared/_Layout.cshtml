@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@inject KanbanMetaWeb.Controllers.CookieChecker cookie;
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,6 +27,17 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            @{ if (cookie.IsLoggedIn)
+                                {
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Login">Logout</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
+                                }
+                            }
                         </li>
                     </ul>
                 </div>
