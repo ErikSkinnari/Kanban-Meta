@@ -30,6 +30,9 @@ namespace KanbanMetaWeb.Controllers
 
         public async Task AddCard(Card card)
         {
+
+            card.Id = Guid.NewGuid().ToString();
+
             JsonFileName = Path.Combine(WebHostEnvironment.WebRootPath, "Data", "cards.json");
 
 
@@ -86,10 +89,25 @@ namespace KanbanMetaWeb.Controllers
             throw new NotImplementedException();
         }
 
-        public Task EditCard(string cardId, Card card)
+        public async Task EditCard(Card card)
         {
-            throw new NotImplementedException();
+            JsonFileName = Path.Combine(WebHostEnvironment.WebRootPath, "Data", "cards.json");
+
+            var dbContent = await File.ReadAllTextAsync(JsonFileName);
+
+            IEnumerable<Card> dataContent = new List<Card>();
+            dataContent = JsonConvert.DeserializeObject<List<Card>>(dbContent);
+
+            var cardToEdit = dataContent.FirstOrDefault(c => c.Id == card.Id);
+
+            cardToEdit.Title = card.Title;
+            cardToEdit.Description = card.Description;
+
+            var json = JsonConvert.SerializeObject(dataContent, Formatting.Indented);
+
+            await File.WriteAllTextAsync(JsonFileName, json);
         }
+
 
         public async Task<Board> GetBoard(string boardId)
         {
@@ -115,7 +133,7 @@ namespace KanbanMetaWeb.Controllers
                 users = System.Text.Json.JsonSerializer.Deserialize<List<User>>(fileReader.ReadToEnd(),
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                foreach(var user in users)
+                foreach (var user in users)
                 {
                     Console.WriteLine(user.Id + " " + user.Username);
                 }

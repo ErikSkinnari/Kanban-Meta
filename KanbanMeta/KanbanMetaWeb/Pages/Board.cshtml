@@ -1,13 +1,18 @@
-﻿@page
+﻿@page "{id?}"
 @model KanbanMetaWeb.Pages.BoardModel
 @{
     ViewData["Title"] = "Board" + Model.BoardId;
 }
 
+@foreach (var user in Model.Board.Users)
+{
+    <h4>@user.Username</h4>
+}
+
 
 <!-- Wrapper with image -->
 <div class="h-100 pt-4 board-wrapper" id="background">
-        
+
     <h1>@Model.Board.Title</h1>
 
     <!-- Whole kanban board -->
@@ -32,56 +37,65 @@
 
                 @if (column.Id == 0)
                 {
-
-                    <div class="d-none p-2 bg-dark text-light" id="newCardInput">
-                        <label for="newCardTitle">Title</label><br>
-                        <input type="text" style="width: 100%;" id="newCardTitle"><br>
-                        <label class="mt-3" for="newCardDescription">Description</label><br>
-                        <textarea name="newCardDescription" id="newCardDescription" style="width: 100%;" rows="5"></textarea>
+                    <form class="d-none p-2 bg-light text-dark" id="newCardInput" asp-page-handler="AddCard">
+                        <input hidden asp-for="NewCard.BoardId" value="@Model.Board.Id" />
+                        <label asp-for="NewCard.Title"> New Title</label><br>
+                        <input type="text" style="width: 100%;" asp-for="NewCard.Title"><br>
+                        <label class="mt-3" asp-for="NewCard.Description">Description</label><br>
+                        <textarea asp-for="NewCard.Description" style="width: 100%;" rows="10"></textarea>
                         <div class="d-flex justify-content-between">
-                            <button class="btn btn-light" id="saveNewCardButton">Save</button>
-                            <button class="btn btn-light" id="discardNewCardButton">Cancel</button>
+                            <button type="submit" class="btn btn-dark">Save</button>
+                            <a asp-page="Board/@Model.Board.Id" class="btn btn-dark">Cancel</a>
                         </div>
-                    </div>
-                }
-            <div id="col-@column.Id}">
+                    </form>
 
-                @foreach (var card in Model.Board.Cards)
-                {
-                    @if (card.ColumnId == column.Id)
+                }
+                <div id="col_@column.Id">
+
+                    @foreach (var card in Model.Board.Cards)
                     {
-                        <!-- Card -->
-                        <div class="card mt-2 p-2 shadow-sm rounded-0 k-card" id="card_@card.Id">
-                            <h5 class="card-header bg-dark text-light rounded-0 k-card-header" id="cardTitle_@card.Id">@card.Title</h5>
-                            <p class="card-text p-3 mb-0" id="cardDescription_@card.Id">@card.Description</p>
+                        @if (card.ColumnId == column.Id)
+                        {
+                            <!-- Card -->
+                            <div class="card mt-2 p-2 shadow-sm rounded-0 k-card" id="card_@card.Id">
+                                <h5 class="card-header bg-dark text-light rounded-0 k-card-header" id="cardTitle_@card.Id">@card.Title</h5>
+                                <p class="card-text p-3 mb-0" id="cardDescription_@card.Id">@card.Description</p>
 
-                            <!-- Card control panel -->
-                            <div class="arrows d-flex justify-content-between mb-1">
-                                <span class="ml-3" style="font-size: 20px;"><i id="moveLeft_@card.Id" class="fas fa-arrow-left text-dark k-card-control"></i></span>
-                                <span style="font-size: 20px;"><i id="editCard_@card.Id" class="fas fa-pen text-dark k-card-control"></i></span>
-                                <span style="font-size: 20px;"><i id="removeCard_@card.Id" class="fas fa-trash-alt text-dark k-card-control"></i></span>
-                                <span class="mr-3" style="font-size: 20px;"><i id="moveRight_@card.Id" class="fas fa-arrow-right text-dark k-card-control"></i></span>
-                            </div>
-
-                            <!-- Card footer -->
-                            <div class="card-footer bg-dark text-light rounded-0 mt-2"></div>
-
-                            <!-- Edit Card -->
-                            <div class="d-none p-2 bg-light text-dark" id="editCardInput_@card.Id">
-                                <label for="editCardTitle_@card.Id"> New Title</label><br>
-                                <input type="text" style="width: 100%;" id="editCardTitle_@card.Id"><br>
-                                <label class="mt-3" for="editCardDescription_@card.Id">Description</label><br>
-                                <textarea name="editCardDescription" id="editCardDescription_@card.Id" style="width: 100%;" rows="10"></textarea>
-                                <div class="d-flex justify-content-between">
-                                    <button class="btn btn-dark" id="saveChangesButton_@card.Id">Save</button>
-                                    <button class="btn btn-dark" id="discardChangesButton_@card.Id">Cancel</button>
+                                <!-- Card control panel -->
+                                <div class="arrows d-flex justify-content-between mb-1">
+                                    <span class="ml-3" style="font-size: 20px;"><i id="moveLeft_@card.Id" class="fas fa-arrow-left text-dark k-card-control"></i></span>
+                                    <span style="font-size: 20px;"><i id="editCard_@card.Id" class="fas fa-pen text-dark k-card-control"></i></span>
+                                    <form asp-page-handler="DeleteCard" class="noBorderButton">
+                                        <input type="hidden" asp-for="DeleteCard.Id" value="@card.Id" />
+                                        <input type="hidden" asp-for="DeleteCard.BoardId" value="@Model.Board.Id" />
+                                        <button type="submit" class="noBorderButton"><i class="fas fa-trash-alt text-dark k-card-control"></i></button>
+                                    </form>
+                                    @*<span style="font-size: 20px;"><i id="removeCard_@card.Id" class="fas fa-trash-alt text-dark k-card-control"></i></span>*@
+                                    <span class="mr-3" style="font-size: 20px;"><i id="moveRight_@card.Id" class="fas fa-arrow-right text-dark k-card-control"></i></span>
                                 </div>
-                            </div>
-                        </div>
-                    }
-                }
 
-            </div>
+                                <!-- Card footer -->
+                                <div class="card-footer bg-dark text-light rounded-0 mt-2"></div>
+
+                                <!-- Edit Card -->
+                                <form class="d-none p-2 bg-light text-dark" id="editCardInput_@card.Id" asp-page-handler="EditCard">
+                                    <input hidden asp-for="EditCard.Id" value="@card.Id" />
+                                    <input hidden asp-for="EditCard.BoardId" value="@card.BoardId" />
+                                    <label asp-for="EditCard.Title"> New Title</label><br>
+                                    <input type="text" style="width: 100%;" asp-for="EditCard.Title" value="@card.Title"><br>
+                                    <label class="mt-3" asp-for="EditCard.Description">Description</label><br>
+                                    <textarea asp-for="EditCard.Description" style="width: 100%;" rows="10" id="editCardDescription_@card.Id"></textarea>
+                                    @*<input type="text" style="width: 100%; height: 100px;" asp-for="EditCard.Description" value="@card.Description"><br>*@
+                                    <div class="d-flex justify-content-between">
+                                        <button type="submit" class="btn btn-dark" id="saveChangesButton_@card.Id">Save</button>
+                                        <a asp-page="Board/@Model.Board.Id" class="btn btn-dark">Cancel</a>
+                                    </div>
+                                </form>
+                            </div>
+                        }
+                    }
+
+                </div>
             </div>
 
         }

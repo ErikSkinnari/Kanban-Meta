@@ -16,7 +16,7 @@ namespace KanbanMetaWeb.Interfaces
 
         public Task AddCard(Card card);
 
-        public Task EditCard(string cardId, Card card);
+        public Task EditCard(Card card);
 
         public Task DeleteCard(string cardId);
 
