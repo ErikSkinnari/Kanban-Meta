@@ -1,0 +1,34 @@
+﻿@page
+@model KanbanMetaWeb.Pages.LoginModel
+@{
+    ViewBag.Title = "User Login";
+}
+
+<h1>User Login</h1>
+
+<div class="row">
+    @{
+        if (Model.loginFaled)
+        {
+            <div class="alert alert-danger" role="alert">
+                A simple danger alert—check it out!
+            </div>
+        }
+    }
+    <div class="col-md-12">
+        <form method="post">
+            @*<div asp-validation-summary="All" class="text-danger"></div>*@
+            <div class="form-group">
+                <label asp-for="user.Email"></label>
+                <input asp-for="user.Email" class="form-control" />
+                @*<span asp-validation-for="user.Email" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="user.Password"></label>
+                <input asp-for="user.Password" class="form-control" />
+                @*<span asp-validation-for="user.Password" class="text-danger"></span>*@
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>
