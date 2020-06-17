@@ -20,6 +20,8 @@ namespace KanbanMetaWeb.Interfaces
 
         public Task DeleteCard(string cardId);
 
+        public Task MoveCard(string cardId, string direction);
+
         //public void AddColumn(int boardId);
 
         //public void AddUser(int boardId, int userId);

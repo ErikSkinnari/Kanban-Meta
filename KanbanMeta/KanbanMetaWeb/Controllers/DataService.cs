@@ -163,6 +163,31 @@ namespace KanbanMetaWeb.Controllers
             return board;
         }
 
+        public async Task MoveCard(string cardId, string direction)
+        {
+            JsonFileName = Path.Combine(WebHostEnvironment.WebRootPath, "Data", "cards.json");
+
+            var dbContent = await File.ReadAllTextAsync(JsonFileName);
+
+            IEnumerable<Card> dataContent = new List<Card>();
+            dataContent = JsonConvert.DeserializeObject<List<Card>>(dbContent);
+
+            var cardToEdit = dataContent.FirstOrDefault(c => c.Id == cardId);
+
+            if(direction == "left")
+            {
+                cardToEdit.ColumnId--;
+            }
+            else if (direction == "right")
+            {
+                cardToEdit.ColumnId++;
+            }
+
+            var json = JsonConvert.SerializeObject(dataContent, Formatting.Indented);
+
+            await File.WriteAllTextAsync(JsonFileName, json);
+        }
+
 
 
 

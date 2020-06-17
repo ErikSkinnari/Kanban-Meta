@@ -31,7 +31,7 @@
 
                     @if (column.Id == 0)
                     {
-                        <button class="btn bg-light text-dark rounded" id="addCardButton"><b><i class="fas fa-plus"></i> Add Card</b></button>
+                        <button class="btn bg-light text-dark rounded" id="addCardButton"><b><i class="fas fa-plus"></i> Add</b></button>
                     }
                 </div>
 
@@ -63,15 +63,53 @@
 
                                 <!-- Card control panel -->
                                 <div class="arrows d-flex justify-content-between mb-1">
-                                    <span class="ml-3" style="font-size: 20px;"><i id="moveLeft_@card.Id" class="fas fa-arrow-left text-dark k-card-control"></i></span>
-                                    <span style="font-size: 20px;"><i id="editCard_@card.Id" class="fas fa-pen text-dark k-card-control"></i></span>
+
+                                    <!-- Left arrow -->
+                                    <div>
+                                        @if (column.Id != 0)
+                                        {
+                                            <form asp-page-handler="MoveCard" class="noBorderButton">
+                                                <input type="hidden" asp-for="MoveCard.Direction" value="left" />
+                                                <input type="hidden" asp-for="MoveCard.CardId" value="@card.Id" />
+                                                <input type="hidden" asp-for="MoveCard.BoardId" value="@Model.Board.Id" />
+                                                <button type="submit" class="noBorderButton" style="font-size: 20px;"><i class="fas fa-arrow-left text-dark k-card-control"></i></button>
+                                            </form>
+                                            @*<span class="ml-3" style="font-size: 20px;"><i id="moveLeft_@card.Id" class="fas fa-arrow-left text-dark k-card-control"></i></span>*@
+                                        }
+                                        else
+                                        {
+                                            <span class="ml-3" style="font-size: 20px;"><i id="moveLeft_@card.Id" class="fas fa-arrow-left text-light k-card-control"></i></span>
+                                        }
+                                    </div>
+
+                                    <!-- Edit button -->
+                                    <form>
+                                        <span style="font-size: 20px;"><i id="editCard_@card.Id" class="fas fa-pen text-dark k-card-control"></i></span>
+                                    </form>
+
+                                    <!-- Delete button -->
                                     <form asp-page-handler="DeleteCard" class="noBorderButton">
                                         <input type="hidden" asp-for="DeleteCard.Id" value="@card.Id" />
                                         <input type="hidden" asp-for="DeleteCard.BoardId" value="@Model.Board.Id" />
-                                        <button type="submit" class="noBorderButton"><i class="fas fa-trash-alt text-dark k-card-control"></i></button>
+                                        <button type="submit" class="noBorderButton" style="font-size: 20px;"><i class="fas fa-trash-alt text-dark k-card-control"></i></button>
                                     </form>
-                                    @*<span style="font-size: 20px;"><i id="removeCard_@card.Id" class="fas fa-trash-alt text-dark k-card-control"></i></span>*@
-                                    <span class="mr-3" style="font-size: 20px;"><i id="moveRight_@card.Id" class="fas fa-arrow-right text-dark k-card-control"></i></span>
+
+                                    <!-- Right arrow -->
+                                    @if (column.Id == Model.Board.Columns.Count() - 1)
+                                    {
+                                        <span class="ml-3" style="font-size: 20px;"><i id="moveLeft_@card.Id" class="fas fa-arrow-left text-light k-card-control"></i></span>
+                                    }
+                                    else
+                                    {
+                                        <form asp-page-handler="MoveCard" class="noBorderButton">
+                                            <input type="hidden" asp-for="MoveCard.Direction" value="right" />
+                                            <input type="hidden" asp-for="MoveCard.CardId" value="@card.Id" />
+                                            <input type="hidden" asp-for="MoveCard.BoardId" value="@Model.Board.Id" />
+                                            <button type="submit" class="noBorderButton" style="font-size: 20px;"><i class="fas fa-arrow-right text-dark k-card-control"></i></button>
+                                        </form>
+                                    }
+
+                                    @*<span class="mr-3" style="font-size: 20px;"><i id="moveRight_@card.Id" class="fas fa-arrow-right text-dark k-card-control"></i></span>*@
                                 </div>
 
                                 <!-- Card footer -->
