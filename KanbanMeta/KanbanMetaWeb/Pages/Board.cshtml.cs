@@ -11,6 +11,13 @@ namespace KanbanMetaWeb.Pages
 {
     public class BoardModel : PageModel
     {
+        public class CardToMove
+        {
+            public string CardId { get; set; }
+            public string Direction { get; set; }
+            public string BoardId { get; set; }
+        }
+
         private IDataManager _dataManger;
 
         public int BoardId { get; set; }
@@ -18,10 +25,14 @@ namespace KanbanMetaWeb.Pages
         public Card EditCard { get; set; }
         public Card NewCard { get; set; }
         public Card DeleteCard { get; set; }
+        public CardToMove MoveCard { get; set; }
+        public string SelectedCardId { get; set; }
+
 
         public BoardModel(IDataManager dataManager)
         {
             _dataManger = dataManager;
+
         }
 
         public IActionResult OnPostEditCard(Card EditCard)
@@ -46,6 +57,13 @@ namespace KanbanMetaWeb.Pages
             await _dataManger.DeleteCard(DeleteCard.Id);
 
             return RedirectToPage("Board", DeleteCard.BoardId);
+        }
+
+        public async Task<IActionResult> OnPostMoveCard(CardToMove MoveCard)
+        {
+            await _dataManger.MoveCard(MoveCard.CardId, MoveCard.Direction);
+            
+            return RedirectToPage("Board", MoveCard.BoardId);
         }
 
         public async void OnGet(string id = "94e25123-afac-4bb4-8b89-0496becc8433")
