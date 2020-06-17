@@ -19,7 +19,7 @@ namespace KanbanMetaWeb.Pages
         [BindProperty]
         public User user { get; set; }
         public string userCookie { get; private set; }
-        public bool loginFaled { get; private set; } = false;
+        public bool loginFailed { get; private set; } = false;
 
         private readonly ILogger<LoginModel> _logger;
 
@@ -28,7 +28,7 @@ namespace KanbanMetaWeb.Pages
         public LoginModel(ILogger<LoginModel> logger, IUserManager userService)
         {
             _logger = logger;
-            _userService= userService;
+            _userService = userService;
         }
 
 
@@ -48,15 +48,15 @@ namespace KanbanMetaWeb.Pages
 
             foreach (var u in users)
             {
-                if(u.Email == user.Email && u.Password == user.Password)
+                if (u.Email == user.Email && u.Password == user.Password)
                 {
                     LogUserIn();
                     return RedirectToPage("Privacy");
                 }
                 else
                 {
-                    loginFaled = true;
-                    return RedirectToPage("Login");
+                    loginFailed = true;
+                    return Page();
                 }
             }
             return RedirectToPage("Login");
