@@ -2,9 +2,9 @@
   {
     "id": "94e25123-afac-4bb4-8589-0476becc8533",
     "boardId": "94e25123-afac-4bb4-8b89-0496becc8433",
-    "title": "Editera kort",
-    "description": "Nytt innehåll!\r\nOch nu lägger vi till lite annat innehåll.",
-    "columnId": 2
+    "title": "Inloggning",
+    "description": "Inloggning tillagd. Man kan nu logga in med en user test@test.com och pwd test.",
+    "columnId": 3
   },
   {
     "id": "819aca91-0e36-4ea9-96c2-aff8ce75945a",
@@ -23,8 +23,8 @@
   {
     "id": "446d8bca-2dd2-45b2-906d-29117606dd40",
     "boardId": "94e25123-afac-4bb4-8b89-0496becc8433",
-    "title": "Ännu ett nytt",
-    "description": "asdasd. Här är ett nytt kort!",
+    "title": "Middleware för auth",
+    "description": "Fixa så att inloggningen styr vilka boards man får tillgång till.",
     "columnId": 0
   },
   {
@@ -33,5 +33,19 @@
     "title": "Ett nytt kort",
     "description": "Nytt kort att flytta..",
     "columnId": 5
+  },
+  {
+    "id": "7a1d404d-9db5-4d79-94ad-58035a5bd30d",
+    "boardId": "94e25123-afac-4bb4-8b89-0496becc8433",
+    "title": "Presentation",
+    "description": "Köra en presentation av nuvarande produkt för Janne.\r\n18/6 kl 14:00.",
+    "columnId": 1
+  },
+  {
+    "id": "21640d0b-cb04-4577-86d1-d97cfb9c8cdf",
+    "boardId": "94e25123-afac-4bb4-8b89-0496becc8433",
+    "title": "Åka motorcykel",
+    "description": "Belöna sig för väl utfört arbete måste man göra!",
+    "columnId": 2
   }
 ]

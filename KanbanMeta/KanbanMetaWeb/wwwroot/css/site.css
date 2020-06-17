@@ -77,3 +77,30 @@ body {
     border: 0;
     padding: 0;
 }
+
+#background {
+    background-image: url('../img/road-landscape-nature-forest-39811.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.c-container {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#main-board {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.main-column {
+    width: 250px;
+}
+
+.arrows {
+    margin-left: 10px;
+    margin-right: 10px;
+}
