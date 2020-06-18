@@ -51,7 +51,7 @@ namespace KanbanMetaWeb.Pages
                 if (u.Email == user.Email && u.Password == user.Password)
                 {
                     LogUserIn();
-                    return RedirectToPage("Privacy");
+                    return RedirectToPage("Board");
                 }
                 else
                 {
