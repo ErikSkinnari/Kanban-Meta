@@ -174,7 +174,7 @@ namespace KanbanMetaWeb.Controllers
 
             var cardToEdit = dataContent.FirstOrDefault(c => c.Id == cardId);
 
-            if(direction == "left")
+            if(direction == "left" && cardToEdit.ColumnId != 0)
             {
                 cardToEdit.ColumnId--;
             }

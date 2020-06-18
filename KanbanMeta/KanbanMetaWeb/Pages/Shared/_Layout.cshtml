@@ -26,19 +26,16 @@
                         <li class="nav-item">
                             @{ if (cookie.IsLoggedIn)
                                 {
-                                    <a class="nav-link text-light" asp-area="" asp-page="/Login">Logout</a>
+                                    <a class="nav-link text-light" asp-area="" asp-page="/Login"><button class="btn btn-outline-light">Logout</button></a>
                                 }
                                 else
                                 {
-                                    <a class="nav-link text-light" asp-area="" asp-page="/Login">Login</a>
+                                    <a class="nav-link text-light" asp-area="" asp-page="/Login"><button class="btn btn-outline-light">Login</button></a>
                                 }
                             }
                         </li>
                     </ul>
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-page="/Index">Home</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>

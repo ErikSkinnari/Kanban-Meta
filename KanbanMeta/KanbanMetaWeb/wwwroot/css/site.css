@@ -104,3 +104,11 @@ body {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.k-card-control:hover {
+    cursor: pointer;
+}
+
+.k-card-header:hover {
+    cursor: grab;
+}
